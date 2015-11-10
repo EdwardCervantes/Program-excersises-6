@@ -1,0 +1,406 @@
+Pregunta 1
+#include <stdio.h>
+#include <stdlib.h>
+int main(void) 
+{
+	int i=3;
+       	float f=2.6;
+	long  y = 5;
+int r1=i+f;
+float r2=i+f;
+double d=5.8;
+	char c='h';
+	int r3=c+i;
+	double r4=f+d;
+printf("int: %d\n", r1);
+printf ("float: %f\n", r2); 
+printf ("int: %d\n", r3); 
+printf ("double: %f\n", r4); 
+	return 0;
+}
+Los resultados son:
+int: 5
+float: 5.600000
+int: 107
+double: 8.400000
+--------------------------
+Pregunta 2
+#include "stdafx.h"
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <limits.h>
+
+int freeMem = 50000;
+typedef struct
+{
+	int start;
+	int end;
+} estructura;
+void NewFree(void * p)
+
+{
+	
+estructura *ptr = (estructura *)p;
+
+	ptr--;
+	
+	freeMem = freeMem + (ptr->end - ptr->start) + sizeof(estructura);
+	
+	if (ptr->start != 0)
+
+	{
+	
+	printf("\nTamaño de memoria : %d\t", ptr->end - ptr->start);
+	
+	printf("Memoria disponible : %d ", freeMem);
+	
+	ptr->start = 0;
+		//free(ptr);
+		printf("\nMemoria liberada...\n");
+
+	}
+
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	char *dest;
+	dest = (char*)malloc(100);
+	NewFree(dest);	
+	return 0;	
+}
+--------------------------
+Pregunta 3
+void Multiplicacion()
+{
+     private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            int[,] aMatrix = new int[3, 2] { { 1, 4 }, { 2, 5 }, { 3, 6 } };
+            int[,] bMatrix = new int[2, 3] { { 7, 8, 9 }, { 10, 11, 12 } };
+            int[,] product = new int[3, 3] { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } };
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 3; col++)
+                {
+                    for (int inner = 0; inner < 2; inner++)
+                    {
+                        product[row, col] += aMatrix[row, inner] * bMatrix[inner, col];
+                    }
+                    Console.WriteLine(product[row, col] + "  ");
+                }
+                Console.WriteLine("\n");
+            }
+        }
+}
+........Lenguaje ensamblado
+.method private hidebysig 
+		instance void Window_Loaded (
+			object sender,
+			class [PresentationCore]System.Windows.RoutedEventArgs e
+		) cil managed 
+	{
+		// Method begins at RVA 0x20d8
+		// Code size 208 (0xd0)
+		.maxstack 6
+		.locals init (
+			[0] int32[0..., 0...] aMatrix,
+			[1] int32[0..., 0...] bMatrix,
+			[2] int32[0..., 0...] product,
+			[3] int32 row,
+			[4] int32 col,
+			[5] int32 inner,
+			[6] int32[0..., 0...] CS$0$0000,
+			[7] bool CS$4$0001
+		)
+
+		IL_0000: nop
+		IL_0001: ldc.i4.3
+		IL_0002: ldc.i4.2
+		IL_0003: newobj instance void int32[0..., 0...]::.ctor(int32, int32)
+		IL_0008: dup
+		IL_0009: ldtoken field valuetype '<PrivateImplementationDetails>{52936A5C-EDB8-4345-985D-DF36629F83FE}'/'__StaticArrayInitTypeSize=24' '<PrivateImplementationDetails>{52936A5C-EDB8-4345-985D-DF36629F83FE}'::'$$method0x6000005-1'
+		IL_000e: call void [mscorlib]System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(class [mscorlib]System.Array, valuetype [mscorlib]System.RuntimeFieldHandle)
+		IL_0013: stloc.0
+		IL_0014: ldc.i4.2
+		IL_0015: ldc.i4.3
+		IL_0016: newobj instance void int32[0..., 0...]::.ctor(int32, int32)
+		IL_001b: dup
+		IL_001c: ldtoken field valuetype '<PrivateImplementationDetails>{52936A5C-EDB8-4345-985D-DF36629F83FE}'/'__StaticArrayInitTypeSize=24' '<PrivateImplementationDetails>{52936A5C-EDB8-4345-985D-DF36629F83FE}'::'$$method0x6000005-2'
+		IL_0021: call void [mscorlib]System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray(class [mscorlib]System.Array, valuetype [mscorlib]System.RuntimeFieldHandle)
+		IL_0026: stloc.1
+		IL_0027: ldc.i4.3
+		IL_0028: ldc.i4.3
+		IL_0029: newobj instance void int32[0..., 0...]::.ctor(int32, int32)
+		IL_002e: stloc.s CS$0$0000
+		IL_0030: ldloc.s CS$0$0000
+		IL_0032: stloc.2
+		IL_0033: ldc.i4.0
+		IL_0034: stloc.3
+		IL_0035: br IL_00c2
+		// loop start (head: IL_00c2)
+			IL_003a: nop
+			IL_003b: ldc.i4.0
+			IL_003c: stloc.s col
+			IL_003e: br.s IL_00a7
+			// loop start (head: IL_00a7)
+				IL_0040: nop
+				IL_0041: ldc.i4.0
+				IL_0042: stloc.s inner
+				IL_0044: br.s IL_0077
+				// loop start (head: IL_0077)
+					IL_0046: nop
+					IL_0047: ldloc.2
+					IL_0048: ldloc.3
+					IL_0049: ldloc.s col
+					IL_004b: call instance int32& int32[0..., 0...]::Address(int32, int32)
+					IL_0050: dup
+					IL_0051: ldobj [mscorlib]System.Int32
+					IL_0056: ldloc.0
+					IL_0057: ldloc.3
+					IL_0058: ldloc.s inner
+					IL_005a: call instance int32 int32[0..., 0...]::Get(int32, int32)
+					IL_005f: ldloc.1
+					IL_0060: ldloc.s inner
+					IL_0062: ldloc.s col
+					IL_0064: call instance int32 int32[0..., 0...]::Get(int32, int32)
+					IL_0069: mul
+					IL_006a: add
+					IL_006b: stobj [mscorlib]System.Int32
+					IL_0070: nop
+					IL_0071: ldloc.s inner
+					IL_0073: ldc.i4.1
+					IL_0074: add
+					IL_0075: stloc.s inner
+
+					IL_0077: ldloc.s inner
+					IL_0079: ldc.i4.2
+					IL_007a: clt
+					IL_007c: stloc.s CS$4$0001
+					IL_007e: ldloc.s CS$4$0001
+					IL_0080: brtrue.s IL_0046
+				// end loop
+
+				IL_0082: ldloc.2
+				IL_0083: ldloc.3
+				IL_0084: ldloc.s col
+				IL_0086: call instance int32 int32[0..., 0...]::Get(int32, int32)
+				IL_008b: box [mscorlib]System.Int32
+				IL_0090: ldstr "  "
+				IL_0095: call string [mscorlib]System.String::Concat(object, object)
+				IL_009a: call void [mscorlib]System.Console::WriteLine(string)
+				IL_009f: nop
+				IL_00a0: nop
+				IL_00a1: ldloc.s col
+				IL_00a3: ldc.i4.1
+				IL_00a4: add
+				IL_00a5: stloc.s col
+
+				IL_00a7: ldloc.s col
+				IL_00a9: ldc.i4.3
+				IL_00aa: clt
+				IL_00ac: stloc.s CS$4$0001
+				IL_00ae: ldloc.s CS$4$0001
+				IL_00b0: brtrue.s IL_0040
+			// end loop
+
+			IL_00b2: ldstr "\n"
+			IL_00b7: call void [mscorlib]System.Console::WriteLine(string)
+			IL_00bc: nop
+			IL_00bd: nop
+			IL_00be: ldloc.3
+			IL_00bf: ldc.i4.1
+			IL_00c0: add
+			IL_00c1: stloc.3
+
+			IL_00c2: ldloc.3
+			IL_00c3: ldc.i4.3
+			IL_00c4: clt
+			IL_00c6: stloc.s CS$4$0001
+			IL_00c8: ldloc.s CS$4$0001
+			IL_00ca: brtrue IL_003a
+		// end loop
+
+		IL_00cf: ret
+	} // end of method Window1::Window_Loaded
+---------------------------
+Pregunta 5
+C++
+int _tmain(int argc, _TCHAR* argv[])
+{
+	enum dia { DOM, LUN, MART, MIERCOLES = 8, JUEV, VIER, SAB } diaX;
+	
+	//enum { DOM, LUN, MART, MIERCOLES, JUEV, VIER, SAB } dia2X; error DOM, LUN, MART ... ya fueron declarados
+	
+	enum dia diapago;
+	int i = MIERCOLES;
+	diaX = LUN;
+	//diaX = 9; error, solo se puede asignar los dias
+	//LUN = MIER; error
+	
+	//double DOM = 0; error ya declarada dom
+	
+	int y = LUN + MART;
+}
+C#
+enum dia { DOM, LUN, MART, MIERCOLES = 8, JUEV, VIER, SAB }; 
+//enum dias diapago;error
+private void Window_Loaded(object sender, RoutedEventArgs e)
+{
+	dia diax;
+	//enum dia { DOM, LUN, MART, MIERCOLES, JUEV, VIER, SAB }; error
+	//enum { DOM, LUN, MART, MIERCOLES, JUEV, VIER, SAB } dia2X; error
+	int i = (int)dia.MIERCOLES;
+	diax = dia.LUN;
+	//diax = 9; error
+	//dia.LUN = dia.MIERCOLES; error
+	//dia.LUN = 5; error
+	int y = (int)dia.LUN + (int)dia.MART;
+}
+---------------------
+Pregunta 6
+public class Clase
+{
+ Animales a = Animales.Gato | Animales.Perro;
+ Console.WriteLine(a);
+ int dia = (int)Dias.Martes;.
+ Console.WriteLine(dia);
+ enum Animales
+ {
+  Gato,
+  Perro,
+  Cocodrilo,
+  Leon,
+  Oso
+ };
+ enum Dias : byte
+ {
+         Lunes = 1,
+         Martes,
+  Miercoles
+ }
+}
+//Salidas:
+//Gato,Perro
+//2
+--------------------
+Pregunta 8
+%data = ('Homero' => 45, 'Lisa' => 30, 'Bart' => 40);
+
+print "$data{'Homero'}\n";
+print "$data{'Lisa'}\n";
+print "$data{'Bart'}\n";
+
+@keys = keys %data;
+$size = @keys;
+print "Tamaño 1:  es $size\n";
+
+$data{'Lisa'} = 55;
+@keys = keys %data;
+$size = @keys;
+print "Tamaño 2:  es $size\n";
+
+$data{'March'} = 15;
+@keys = keys %data;
+$size = @keys;
+print "Tamaño 3:  es $size\n";
+-------------------------
+Pregunta 9
+typedef struct
+{
+ int dato1;
+ int dato2;
+} Estructura1;
+
+typedef struct 
+{
+ int dato1;
+ int dato2;
+} Estructura2;
+int main()
+{
+ cout << "Hello world!" << endl;
+ int a,b;
+ int c;
+ int d;
+ Estructura1 x, y;
+ Estructura2 r, s;
+ return 0;
+}
+
+x = y;//true
+r = s;//true
+//usando named equivalence
+x = r;//false
+//usando structure equivalence
+x = r;//true
+--------------------------
+Pregunta 10
+C++
+int A = 5;
+double C = 7.2;
+float D = 8.2;
+char e = 'a';
+bool b1 = 1;
+	
+A = C;	//A=7
+A = D;	//A=8
+e = A;	//'b'
+b1 = A;	//true
+e = b1;	//x1
+b1 = C;	//true
+D = b1; //1.000000
+
+Java
+int A = 5;
+double C = 7.2;
+char e = 'a';
+boolean b1 = true;
+	
+A = C;	//possible lossy conversion from double to int A = C;
+A = D;	//ok
+e = A;	//possible lossy conversion from int to char e = A;
+b1 = A;	//incompatible types: int cannot be converted to boolean b1 = A;
+e = b1;	//incompatible types: boolean cannot be converted to char e = b1;
+b1 = C;	//incompatible types: double cannot be converted to boolean b1 = C;
+D = b1; // incompatible types: double cannot be converted to float D = b1;
+
+----------------------------
+Pregunta 11
+ADA
+With Ada.Text_IO; Use Ada.Text_IO;  
+With Ada.Integer_Text_IO; Use Ada.Integer_Text_IO;
+procedure Program is
+flotante : float := 22.41;
+caracter : character := 'M';
+cadena : String := "string en Ada!";
+numero : integer := 214685;
+boleano : boolean := TRUE;
+begin
+ put("Hello World");
+  flotante:=caracter; //error expected type "Standard.Float"
+  boleano:=numero;//error expected type "Standard.Boolean"
+  numero:=boleano;//error expected type "Standard.Integer"
+  caracter:=numero;//error expected type "Standard.Character"
+  numero:=flotante;//error expected type "Standard.Integer"
+  cadena:=caracter;//error expected type "Standard.String"
+  boleano:=character;//error expected type "Standard.Boolean"
+  caracter:=cadena;//error expected type "Standard.Character"
+  flotante:=numero;//error expected type "Standard.Float"
+end Program;
+Java
+int A = 5;
+double C = 7.2;
+char e = 'a';
+boolean b1 = true;
+	
+A = C;	//possible lossy conversion from double to int A = C;
+A = D;	//ok
+e = A;	//possible lossy conversion from int to char e = A;
+b1 = A;	//incompatible types: int cannot be converted to boolean b1 = A;
+e = b1;	//incompatible types: boolean cannot be converted to char e = b1;
+b1 = C;	//incompatible types: double cannot be converted to boolean b1 = C;
+D = b1; //1.000000
+
